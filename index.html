@@ -131,6 +131,12 @@
     <canvas id="hero-canvas"></canvas>
 
     <div class="content-wrapper">
+        <!-- Zoom Controls -->
+        <div id="zoom-controls" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2">
+            <button id="zoom-in" class="w-12 h-12 bg-sky-500/30 backdrop-blur-sm border border-sky-500/50 text-white rounded-full text-2xl hover:bg-sky-500/50 transition-colors flex justify-center items-center pb-1">+</button>
+            <button id="zoom-out" class="w-12 h-12 bg-sky-500/30 backdrop-blur-sm border border-sky-500/50 text-white rounded-full text-2xl hover:bg-sky-500/50 transition-colors flex justify-center items-center pb-1">-</button>
+        </div>
+
         <!-- Header Section -->
         <header class="header-glass fixed w-full top-0 z-50">
             <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -147,27 +153,25 @@
         </header>
 
         <!-- Hero Section with 3D Model -->
-        <section id="home" class="relative h-[250vh] text-center text-white overflow-hidden">
-             <div class="sticky top-0 h-screen flex items-center justify-center">
-                <div class="max-w-4xl mx-auto px-4">
-                    <h1 class="text-5xl md:text-8xl font-bold mb-4 text-shadow tracking-tighter title-font">SMTE ม.1/15</h1>
-                    <h2 class="text-3xl md:text-5xl font-light text-shadow text-sky-200">โรงเรียนบุญวาทย์วิทยาลัย</h2>
-                    <p class="mt-8 text-lg md:text-xl text-sky-100/90 text-shadow max-w-2xl mx-auto">
-                        ก้าวสู่มิติใหม่แห่งการเรียนรู้ด้านวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยี และสิ่งแวดล้อม
-                    </p>
-                </div>
-                 <!-- Scroll Down Indicator -->
-                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
-                    <div class="w-8 h-8 text-sky-300 animate-bounce">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5" />
-                        </svg>
-                    </div>
-                </div>
+        <section id="home" class="relative h-screen flex items-center justify-center text-center text-white">
+             <div class="max-w-4xl mx-auto px-4">
+                <h1 class="text-5xl md:text-8xl font-bold mb-4 text-shadow tracking-tighter title-font">SMTE ม.1/15</h1>
+                <h2 class="text-3xl md:text-5xl font-light text-shadow text-sky-200">โรงเรียนบุญวาทย์วิทยาลัย</h2>
+                <p class="mt-8 text-lg md:text-xl text-sky-100/90 text-shadow max-w-2xl mx-auto">
+                    ก้าวสู่มิติใหม่แห่งการเรียนรู้ด้านวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยี และสิ่งแวดล้อม
+                </p>
+            </div>
+             <!-- Scroll Down Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
+                 <a href="#about" class="w-8 h-8 text-sky-300 animate-bounce block">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5" />
+                    </svg>
+                </a>
             </div>
         </section>
 
-        <main class="container mx-auto px-6 py-16 -mt-[150vh]">
+        <main class="container mx-auto px-6 py-16">
 
             <!-- About SMTE Section -->
             <section id="about" class="py-24 scroll-reveal">
@@ -203,8 +207,8 @@
             <!-- Members Section -->
             <section id="members" class="py-24 scroll-reveal">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-white title-font">OUR LEADERSHIP</h2>
-                    <p class="text-xl text-sky-300 mt-4">ท่านผู้นำ New world order</p>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white title-font">THE FUTURE CREATORS</h2>
+                    <p class="text-xl text-sky-300 mt-4">กลุ่มพลังเล็กๆ ที่พร้อมจะขับเคลื่อนโลกใบนี้</p>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
                     <!-- Placeholder for class members -->
@@ -239,29 +243,29 @@
             <!-- Gallery Section -->
             <section id="gallery" class="py-24 scroll-reveal">
                  <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-white title-font">ACTIVITIES</h2>
-                    <p class="text-xl text-sky-300 mt-4">กิจกรรมต่างๆที่เราได้ร่วม</p>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white title-font">OUR JOURNEY</h2>
+                    <p class="text-xl text-sky-300 mt-4">บันทึกการเดินทางแห่งการเรียนรู้และสร้างสรรค์</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="glass-card overflow-hidden group">
                         <img src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=Science+Project';" alt="ภาพโครงงานวิทยาศาสตร์" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2 text-white">ค่ายวิทยาศาสตร์มช.</h3>
-                            <p class="text-sky-200">เข้าร่วมแล็บกล้องจุลทรรศ และ แล็บเคมี</p>
+                            <h3 class="text-xl font-semibold mb-2 text-white">โครงงานวิทยาศาสตร์</h3>
+                            <p class="text-sky-200">เปลี่ยนความสงสัยให้กลายเป็นการค้นพบที่ยิ่งใหญ่</p>
                         </div>
                     </div>
                     <div class="glass-card overflow-hidden group">
                         <img src="https://images.unsplash.com/photo-1534665482403-a909d0d97c67?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=Coding+Camp';" alt="ภาพกิจกรรมเขียนโค้ด" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
                          <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2 text-white">ค่ายปฐมนิเทศSMTEยุพราข</h3>
-                            <p class="text-sky-200">NingNatural</p>
+                            <h3 class="text-xl font-semibold mb-2 text-white">ค่ายเขียนโค้ด</h3>
+                            <p class="text-sky-200">สร้างโลกดิจิทัลจากศูนย์ด้วยพลังแห่งอัลกอริทึม</p>
                         </div>
                     </div>
                      <div class="glass-card overflow-hidden group">
-                        <img src="https://images.unsplash.com/photo-1581092921462-683a3a234b64?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=กูไม่มีภาพ';" alt="กูไม่มีภาพ" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
+                        <img src="https://images.unsplash.com/photo-1581092921462-683a3a234b64?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=Robotics+Club';" alt="ภาพชมรมหุ่นยนต์" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
                          <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2 text-white">สัปดาห์วิทยาศาสตร์ มช.</h3>
-                            <p class="text-sky-200">ไปดูโครงงานที่มหาวิทยาลัยเชียงใหม่</p>
+                            <h3 class="text-xl font-semibold mb-2 text-white">การแข่งขันหุ่นยนต์</h3>
+                            <p class="text-sky-200">หลอมรวมวิศวกรรมและซอฟต์แวร์ให้มีชีวิต</p>
                         </div>
                     </div>
                 </div>
@@ -289,9 +293,13 @@
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
         let scene, camera, renderer, clock, composer;
-        let galaxy, galaxyDust, galaxyCore, wormholeParticles;
+        let galaxy, galaxyDust, galaxyCore, starClusters;
         let mouse = new THREE.Vector2();
         let hoverSynth;
+        let targetZoom;
+        const zoomSpeed = 0.05;
+        const minZoom = 6;
+        const maxZoom = 25;
 
         // Shaders
         const galaxyVertexShader = `
@@ -309,11 +317,14 @@
                 // Differential Rotation
                 float angle = atan(modelPosition.x, modelPosition.z);
                 float distanceToCenter = length(modelPosition.xz);
-                float angleOffset = (1.0 / (distanceToCenter + 1.0)) * uTime * 0.2;
+                float angleOffset = (1.0 / (distanceToCenter * 0.5 + 1.0)) * uTime * 0.3;
                 angle += angleOffset;
 
                 modelPosition.x = cos(angle) * distanceToCenter;
                 modelPosition.z = sin(angle) * distanceToCenter;
+                
+                // Vertical Wave
+                modelPosition.y += sin(distanceToCenter * 0.5 - uTime * 0.1) * 0.2;
 
                 vec4 viewPosition = viewMatrix * modelPosition;
                 gl_Position = projectionMatrix * viewPosition;
@@ -332,35 +343,13 @@
 
                 // Star Twinkling
                 float randomFactor = fract(sin(dot(vPosition.xz, vec2(12.9898, 78.233))) * 43758.5453);
-                float twinkle = sin(uTime * (randomFactor * 2.0 + 1.0)) * 0.5 + 0.5;
-                strength *= (0.7 + twinkle * 0.3);
+                float twinkle = (sin(uTime * (randomFactor * 2.0 + 1.0)) * 0.5 + 0.5) * (sin(uTime * 0.5 + randomFactor * 10.0) * 0.2 + 0.8);
+                strength *= (0.6 + twinkle * 0.4);
 
                 gl_FragColor = vec4(vColor, strength);
             }
         `;
-
-        const wormholeVertexShader = `
-            uniform float uScrollProgress;
-            varying float vProgress;
-            void main() {
-                vProgress = uScrollProgress;
-                vec3 p = position;
-                p.z += (1.0 - uScrollProgress) * 200.0;
-                vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
-                gl_PointSize = (100.0 / -mvPosition.z) * (uScrollProgress * uScrollProgress);
-                gl_Position = projectionMatrix * mvPosition;
-            }
-        `;
-
-        const wormholeFragmentShader = `
-            varying float vProgress;
-            void main() {
-                float d = distance(gl_PointCoord, vec2(0.5));
-                float opacity = (1.0 - d * 2.0) * smoothstep(0.0, 0.2, vProgress) * (1.0 - smoothstep(0.8, 1.0, vProgress));
-                gl_FragColor = vec4(0.8, 0.9, 1.0, opacity);
-            }
-        `;
-
+        
         const generateGalaxy = (parameters) => {
             const geometry = new THREE.BufferGeometry();
             const positions = new Float32Array(parameters.count * 3);
@@ -374,9 +363,11 @@
                 const radius = Math.random() * parameters.radius;
                 const spinAngle = radius * parameters.spin;
                 const branchAngle = (i % parameters.branches) / parameters.branches * Math.PI * 2;
+                
+                const yRandomness = parameters.yRandomness !== undefined ? parameters.yRandomness : parameters.randomness;
 
                 const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius;
-                const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * 0.5;
+                const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * yRandomness;
                 const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius;
 
                 positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
@@ -416,7 +407,7 @@
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.z = 12;
-            camera.position.y = 2;
+            camera.position.y = 2.5;
 
 
             const canvas = document.getElementById('hero-canvas');
@@ -434,7 +425,7 @@
             const renderScene = new RenderPass(scene, camera);
             const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
             bloomPass.threshold = 0.1;
-            bloomPass.strength = 0.7; // Reduced bloom strength
+            bloomPass.strength = 0.7; 
             bloomPass.radius = 0.4;
             
             composer = new EffectComposer(renderer);
@@ -443,12 +434,13 @@
 
             // Galactic Core
             galaxyCore = generateGalaxy({
-                count: 50000,
+                count: 75000, 
                 size: 30.0,
-                radius: 2.5,
+                radius: 3.0, 
                 branches: 3,
                 spin: 0.2,
-                randomness: 0.3,
+                randomness: 0.5,
+                yRandomness: 1.0, 
                 randomnessPower: 2,
                 insideColor: '#ffffff',
                 outsideColor: '#ffac69'
@@ -457,50 +449,65 @@
 
             // Main Galaxy Arms
             galaxy = generateGalaxy({
-                count: 100000,
+                count: 150000, 
                 size: 20.0,
                 radius: 15,
                 branches: 5,
                 spin: 0.5,
                 randomness: 0.4,
+                yRandomness: 0.5, 
                 randomnessPower: 3,
                 insideColor: '#ffac69',
                 outsideColor: '#3d68b2'
             });
             scene.add(galaxy);
 
-            // Galaxy Dust / Nebula
+            // Galaxy Dust / Haze
             galaxyDust = generateGalaxy({
-                count: 50000,
+                count: 75000, 
                 size: 25.0,
                 radius: 15,
                 branches: 5,
                 spin: 0.5,
                 randomness: 1.5,
+                yRandomness: 1.0, 
                 randomnessPower: 3,
                 insideColor: '#a552f5',
                 outsideColor: '#f552a9'
             });
             scene.add(galaxyDust);
-
-            // Wormhole
-            const wormholeGeometry = new THREE.BufferGeometry();
-            const wormholePositions = new Float32Array(5000 * 3);
-            for(let i=0; i<5000; i++) {
-                wormholePositions.set([ (Math.random() - 0.5) * 100, (Math.random() - 0.5) * 100, (Math.random() - 2) * 100 ], i*3);
-            }
-            wormholeGeometry.setAttribute('position', new THREE.BufferAttribute(wormholePositions, 3));
-            const wormholeMaterial = new THREE.ShaderMaterial({
-                vertexShader: wormholeVertexShader, fragmentShader: wormholeFragmentShader,
-                uniforms: { uScrollProgress: { value: 0 } },
-                blending: THREE.AdditiveBlending, transparent: true, depthWrite: false
+            
+            // Star Clusters
+            starClusters = generateGalaxy({
+                count: 2000,
+                size: 35.0,
+                radius: 14,
+                branches: 5,
+                spin: 0.5,
+                randomness: 0.1, // Tightly packed
+                yRandomness: 0.1,
+                randomnessPower: 2,
+                insideColor: '#cceeff',
+                outsideColor: '#aaddff'
             });
-            wormholeParticles = new THREE.Points(wormholeGeometry, wormholeMaterial);
-            scene.add(wormholeParticles);
+            scene.add(starClusters);
+
+            // Zoom logic
+            targetZoom = camera.position.z;
+            const zoomInButton = document.getElementById('zoom-in');
+            const zoomOutButton = document.getElementById('zoom-out');
+
+            zoomInButton.addEventListener('click', () => {
+                targetZoom = Math.max(minZoom, targetZoom - 4);
+            });
+
+            zoomOutButton.addEventListener('click', () => {
+                targetZoom = Math.min(maxZoom, targetZoom + 4);
+            });
+
 
             window.addEventListener('resize', onWindowResize, false);
             document.addEventListener('mousemove', onMouseMove, false);
-            window.addEventListener('scroll', handleScroll, true);
             animate();
         }
 
@@ -516,15 +523,6 @@
             mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
         }
         
-        function handleScroll() {
-            const scrollY = window.scrollY;
-            const scrollableHeight = document.getElementById('home').clientHeight - window.innerHeight;
-            const scrollFraction = Math.min(scrollY / scrollableHeight, 1.0);
-            
-            // This now only controls the wormhole particles, not the galaxy's visibility
-            wormholeParticles.material.uniforms.uScrollProgress.value = scrollFraction;
-        }
-
         function animate() {
             requestAnimationFrame(animate);
             const elapsedTime = clock.getElapsedTime();
@@ -532,6 +530,10 @@
             galaxy.material.uniforms.uTime.value = elapsedTime;
             galaxyDust.material.uniforms.uTime.value = elapsedTime * 0.8;
             galaxyCore.material.uniforms.uTime.value = elapsedTime * 1.2;
+            starClusters.material.uniforms.uTime.value = elapsedTime;
+
+            // Smooth zoom
+            camera.position.z += (targetZoom - camera.position.z) * zoomSpeed;
 
             camera.position.x += (mouse.x * 2 - camera.position.x) * 0.05;
             camera.position.y += (-mouse.y * 2 - camera.position.y) * 0.05;
@@ -572,4 +574,5 @@
     </script>
 </body>
 </html>
+
 
