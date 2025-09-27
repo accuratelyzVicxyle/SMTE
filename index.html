@@ -119,6 +119,27 @@
         }
         .animated-icon svg { transition: transform 0.3s ease-in-out; }
         .animated-icon:hover svg { transform: rotate(15deg) scale(1.2); }
+
+        #star-label {
+            position: fixed;
+            bottom: 1.25rem; /* 20px */
+            left: 1.25rem; /* 20px */
+            visibility: hidden;
+            z-index: 50;
+            color: #93c5fd; /* A lighter blue */
+            font-family: 'Orbitron', monospace;
+            background: rgba(14, 51, 92, 0.5);
+            backdrop-filter: blur(5px);
+            padding: 0.75rem 1rem; /* 12px 16px */
+            border-radius: 8px;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            font-size: 16px;
+            pointer-events: none;
+            transition: opacity 0.3s, visibility 0.3s;
+            opacity: 0;
+            white-space: nowrap;
+            min-width: 280px;
+        }
     </style>
 </head>
 <body class="text-gray-200">
@@ -129,6 +150,8 @@
     </div>
 
     <canvas id="hero-canvas"></canvas>
+
+    <div id="star-label"></div>
 
     <div class="content-wrapper">
         <!-- Zoom Controls -->
@@ -153,33 +176,31 @@
         </header>
 
         <!-- Hero Section with 3D Model -->
-        <section id="home" class="relative h-[250vh] text-center text-white overflow-hidden">
-             <div class="sticky top-0 h-screen flex items-center justify-center">
-                <div class="max-w-4xl mx-auto px-4">
-                    <h1 class="text-5xl md:text-8xl font-bold mb-4 text-shadow tracking-tighter title-font">SMTE ม.1/15</h1>
-                    <h2 class="text-3xl md:text-5xl font-light text-shadow text-sky-200">โรงเรียนบุญวาทย์วิทยาลัย</h2>
-                    <p class="mt-8 text-lg md:text-xl text-sky-100/90 text-shadow max-w-2xl mx-auto">
-                        ก้าวสู่มิติใหม่แห่งการเรียนรู้ด้านวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยี และสิ่งแวดล้อม
-                    </p>
-                </div>
-                 <!-- Scroll Down Indicator -->
-                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
-                     <a href="#about" class="w-8 h-8 text-sky-300 animate-bounce block">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5" />
-                        </svg>
-                    </a>
-                </div>
+        <section id="home" class="relative h-screen flex items-center justify-center text-center text-white">
+             <div class="max-w-4xl mx-auto px-4">
+                <h1 class="text-5xl md:text-8xl font-bold mb-4 text-shadow tracking-tighter title-font">SMTE ม.1/15</h1>
+                <h2 class="text-3xl md:text-5xl font-light text-shadow text-sky-200">โรงเรียนบุญวาทย์วิทยาลัย</h2>
+                <p class="mt-8 text-lg md:text-xl text-sky-100/90 text-shadow max-w-2xl mx-auto">
+                    ก้าวสู่มิติใหม่แห่งการเรียนรู้ด้านวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยี และสิ่งแวดล้อม
+                </p>
+            </div>
+             <!-- Scroll Down Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
+                 <a href="#about" class="w-8 h-8 text-sky-300 animate-bounce block">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5" />
+                    </svg>
+                </a>
             </div>
         </section>
 
-        <main class="container mx-auto px-6 py-16 -mt-[150vh]">
+        <main class="container mx-auto px-6 py-16">
 
             <!-- About SMTE Section -->
             <section id="about" class="py-24 scroll-reveal">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold text-white title-font">WHAT IS SMTE?</h2>
-                    <p class="text-xl text-sky-300 mt-4 max-w-3xl mx-auto">skibidi ohio sigma</p>
+                    <p class="text-xl text-sky-300 mt-4 max-w-3xl mx-auto">smte is smte</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8 text-center">
                     <div class="glass-card p-8 animated-icon">
@@ -210,7 +231,7 @@
             <section id="members" class="py-24 scroll-reveal">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold text-white title-font">OUR LEADERSHIP</h2>
-                    <p class="text-xl text-sky-300 mt-4">กลุ่ม New World Order ที่เคลือบตัวด้วยสีเหลือง</p>
+                    <p class="text-xl text-sky-300 mt-4">กลุ่มนายพล neo nazi จาก new world order</p>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
                     <!-- Placeholder for class members -->
@@ -250,24 +271,24 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="glass-card overflow-hidden group">
-                        <img src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=Science+Project';" alt="ภาพโครงงานวิทยาศาสตร์" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
+                        <img src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=Science+CMU';" alt="วิทยาศาสตร์" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold mb-2 text-white">ค่ายวิทย์มช.</h3>
                             <p class="text-sky-200">ทำแล็บที่มหาวิทยาลัยเชียงใหม่</p>
                         </div>
                     </div>
                     <div class="glass-card overflow-hidden group">
-                        <img src="https://images.unsplash.com/photo-1534665482403-a909d0d97c67?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=Sigma';" alt="ภาพโง่ๆ" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
+                        <img src="https://images.unsplash.com/photo-1534665482403-a909d0d97c67?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=yupparaj';" alt="ยุพราช" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
                          <div class="p-6">
                             <h3 class="text-xl font-semibold mb-2 text-white">ปฐมนิเทศ SMTE ยุพราช</h3>
-                            <p class="text-sky-200">กูไม่รู้จะเอาภาพไหนมาใส่</p>
+                            <p class="text-sky-200">idk where to find picture so heres ur random ahh</p>
                         </div>
                     </div>
                      <div class="glass-card overflow-hidden group">
-                        <img src="https://images.unsplash.com/photo-1581092921462-683a3a234b64?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=idk+what+to+put';" alt="กูไม่มีภาพ" class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
+                        <img src="https://images.unsplash.com/photo-1581092921462-683a3a234b64?q=80&w=2070&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0c4a6e/e0f2fe?text=chiangmai+university';" alt="มช." class="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-100">
                          <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2 text-white">goo mai ru</h3>
-                            <p class="text-sky-200">uhm what the sigma</p>
+                            <h3 class="text-xl font-semibold mb-2 text-white">สัปดาห์วิทยาศาสตร์ 2568</h3>
+                            <p class="text-sky-200">sigma balls</p>
                         </div>
                     </div>
                 </div>
@@ -283,7 +304,7 @@
                     <a href="#" class="text-sky-300 hover:text-white transition duration-300">Facebook</a>
                     <a href="#" class="text-sky-300 hover:text-white transition duration-300">Website โรงเรียน</a>
                 </div>
-                <p class="mt-8 text-sm text-sky-400/70">&copy; 2025 SMTE M.1/15 Bunyawat Witthayalai School. Designed by ท่านลอร์ด new world order</p>
+                <p class="mt-8 text-sm text-sky-400/70">&copy; 2025 SMTE M.1/15 Bunyawat Witthayalai School. Designed by uhh that one guy</p>
             </div>
         </footer>
     </div>
@@ -294,7 +315,7 @@
         import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
-        let scene, camera, renderer, clock, composer, galaxyGroup;
+        let scene, camera, renderer, clock, composer, galaxyGroup, galaxyCore, galaxy, galaxyDust;
         let mouse = new THREE.Vector2();
         let hoverSynth;
         let targetZoom;
@@ -303,6 +324,8 @@
         const maxZoom = 25;
         let isDragging = false;
         let previousMousePosition = { x: 0, y: 0 };
+        
+        let raycaster, starLabel, lastIntersectedPoint, labelInterval;
 
         // Shaders
         const galaxyVertexShader = `
@@ -408,6 +431,48 @@
             return new THREE.Points(geometry, material);
         }
 
+        function generateStarName() {
+            const prefixes = ['Alpha', 'Beta', 'Gliese', 'Kepler', 'Proxima', 'HD', 'TRAPPIST-', 'PSR'];
+            const suffixes = ['-b', '-c', '-d', ' Majoris', ' Minoris', ' Prime', ' X1', ' J1748'];
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let randomPart = '';
+            for(let i=0; i < Math.random() * 3 + 4; i++) {
+                randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return `${prefixes[Math.floor(Math.random() * prefixes.length)]} ${randomPart}${suffixes[Math.floor(Math.random() * suffixes.length)]}`;
+        }
+
+        function startLabelAnimation(targetName) {
+            clearInterval(labelInterval);
+            
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#?*&';
+            let iteration = 0;
+            
+            labelInterval = setInterval(() => {
+                starLabel.innerText = targetName.split("")
+                    .map((letter, index) => {
+                        if(index < iteration) {
+                            return targetName[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+                
+                if(iteration >= targetName.length) {
+                    clearInterval(labelInterval);
+                }
+                
+                iteration += 1 / 3;
+            }, 50);
+        }
+
+        function hideLabel() {
+            starLabel.style.opacity = 0;
+            starLabel.style.visibility = 'hidden';
+            clearInterval(labelInterval);
+        }
+
+
         function init() {
             clock = new THREE.Clock();
             scene = new THREE.Scene();
@@ -442,7 +507,7 @@
             scene.add(galaxyGroup);
 
             // Galactic Core
-            const galaxyCore = generateGalaxy({
+            galaxyCore = generateGalaxy({
                 count: 75000, 
                 size: 30.0,
                 radius: 3.0, 
@@ -457,7 +522,7 @@
             galaxyGroup.add(galaxyCore);
 
             // Main Galaxy Arms
-            const galaxy = generateGalaxy({
+            galaxy = generateGalaxy({
                 count: 150000, 
                 size: 20.0,
                 radius: 15,
@@ -472,7 +537,7 @@
             galaxyGroup.add(galaxy);
 
             // Galaxy Dust / Haze
-            const galaxyDust = generateGalaxy({
+            galaxyDust = generateGalaxy({
                 count: 75000, 
                 size: 25.0,
                 radius: 15,
@@ -485,6 +550,13 @@
                 outsideColor: '#f552a9'
             });
             galaxyGroup.add(galaxyDust);
+
+            // Star Label Logic
+            starLabel = document.getElementById('star-label');
+            raycaster = new THREE.Raycaster();
+            raycaster.params.Points.threshold = 0.5;
+            lastIntersectedPoint = new THREE.Vector3(Infinity, Infinity, Infinity);
+
 
             // Zoom logic
             targetZoom = camera.position.z;
@@ -561,9 +633,34 @@
             // Pan camera only when not dragging
             if (!isDragging) {
                 camera.position.x += (mouse.x * 2 - camera.position.x) * 0.05;
-                camera.position.y += (-mouse.y * 2 - (camera.position.y - 2 - breathing)) * 0.05; // Adjust for breathing
+                camera.position.y += (-mouse.y * 2 - (camera.position.y - 2 - breathing)) * 0.05; 
             }
             camera.lookAt(scene.position);
+
+            // Raycasting for star label
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(galaxyGroup.children);
+
+            if (intersects.length > 0) {
+                const intersectionPoint = intersects[0].point;
+
+                if (lastIntersectedPoint.distanceTo(intersectionPoint) > 0.1) {
+                    lastIntersectedPoint.copy(intersectionPoint);
+                    const name = generateStarName();
+                    startLabelAnimation(name);
+                }
+
+                // Removed the transform logic, position is now fixed by CSS
+                starLabel.style.opacity = 1;
+                starLabel.style.visibility = 'visible';
+
+            } else {
+                if (starLabel.style.opacity !== "0") {
+                     lastIntersectedPoint.set(Infinity, Infinity, Infinity);
+                     hideLabel();
+                }
+            }
+
 
             composer.render();
         }
@@ -600,4 +697,5 @@
     </script>
 </body>
 </html>
+
 
