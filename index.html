@@ -153,25 +153,27 @@
         </header>
 
         <!-- Hero Section with 3D Model -->
-        <section id="home" class="relative h-screen flex items-center justify-center text-center text-white">
-             <div class="max-w-4xl mx-auto px-4">
-                <h1 class="text-5xl md:text-8xl font-bold mb-4 text-shadow tracking-tighter title-font">SMTE ม.1/15</h1>
-                <h2 class="text-3xl md:text-5xl font-light text-shadow text-sky-200">โรงเรียนบุญวาทย์วิทยาลัย</h2>
-                <p class="mt-8 text-lg md:text-xl text-sky-100/90 text-shadow max-w-2xl mx-auto">
-                    ก้าวสู่มิติใหม่แห่งการเรียนรู้ด้านวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยี และสิ่งแวดล้อม
-                </p>
-            </div>
-             <!-- Scroll Down Indicator -->
-            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
-                 <a href="#about" class="w-8 h-8 text-sky-300 animate-bounce block">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5" />
-                    </svg>
-                </a>
+        <section id="home" class="relative h-[250vh] text-center text-white overflow-hidden">
+             <div class="sticky top-0 h-screen flex items-center justify-center">
+                <div class="max-w-4xl mx-auto px-4">
+                    <h1 class="text-5xl md:text-8xl font-bold mb-4 text-shadow tracking-tighter title-font">SMTE ม.1/15</h1>
+                    <h2 class="text-3xl md:text-5xl font-light text-shadow text-sky-200">โรงเรียนบุญวาทย์วิทยาลัย</h2>
+                    <p class="mt-8 text-lg md:text-xl text-sky-100/90 text-shadow max-w-2xl mx-auto">
+                        ก้าวสู่มิติใหม่แห่งการเรียนรู้ด้านวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยี และสิ่งแวดล้อม
+                    </p>
+                </div>
+                 <!-- Scroll Down Indicator -->
+                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
+                     <a href="#about" class="w-8 h-8 text-sky-300 animate-bounce block">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5" />
+                        </svg>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <main class="container mx-auto px-6 py-16">
+        <main class="container mx-auto px-6 py-16 -mt-[150vh]">
 
             <!-- About SMTE Section -->
             <section id="about" class="py-24 scroll-reveal">
@@ -292,14 +294,15 @@
         import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
-        let scene, camera, renderer, clock, composer;
-        let galaxy, galaxyDust, galaxyCore, starClusters;
+        let scene, camera, renderer, clock, composer, galaxyGroup;
         let mouse = new THREE.Vector2();
         let hoverSynth;
         let targetZoom;
         const zoomSpeed = 0.05;
         const minZoom = 6;
         const maxZoom = 25;
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
 
         // Shaders
         const galaxyVertexShader = `
@@ -312,23 +315,26 @@
             void main() {
                 vColor = color;
                 vPosition = position;
-                vec4 modelPosition = modelMatrix * vec4(position, 1.0);
                 
-                // Differential Rotation
-                float angle = atan(modelPosition.x, modelPosition.z);
-                float distanceToCenter = length(modelPosition.xz);
+                // --- CORRECTED LOGIC ---
+                // Calculate differential rotation in LOCAL SPACE first
+                float distanceToCenter = length(position.xz);
+                float angle = atan(position.x, position.z);
                 float angleOffset = (1.0 / (distanceToCenter * 0.5 + 1.0)) * uTime * 0.3;
                 angle += angleOffset;
 
-                modelPosition.x = cos(angle) * distanceToCenter;
-                modelPosition.z = sin(angle) * distanceToCenter;
-                
-                // Vertical Wave
-                modelPosition.y += sin(distanceToCenter * 0.5 - uTime * 0.1) * 0.2;
+                // Create a new position vector with the rotation applied
+                vec3 newPosition = vec3(
+                    cos(angle) * distanceToCenter,
+                    position.y,
+                    sin(angle) * distanceToCenter
+                );
 
-                vec4 viewPosition = viewMatrix * modelPosition;
-                gl_Position = projectionMatrix * viewPosition;
-                gl_PointSize = uSize * aScale * (1.0 / -viewPosition.z);
+                // Now apply the model, view, and projection matrices
+                vec4 modelViewPosition = modelViewMatrix * vec4(newPosition, 1.0);
+                gl_Position = projectionMatrix * modelViewPosition;
+                
+                gl_PointSize = uSize * aScale * (1.0 / -modelViewPosition.z);
             }
         `;
 
@@ -407,7 +413,7 @@
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.z = 12;
-            camera.position.y = 2.5;
+            camera.position.y = 2;
 
 
             const canvas = document.getElementById('hero-canvas');
@@ -425,15 +431,18 @@
             const renderScene = new RenderPass(scene, camera);
             const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
             bloomPass.threshold = 0.1;
-            bloomPass.strength = 0.7; 
+            bloomPass.strength = 0.7; // Reduced bloom strength
             bloomPass.radius = 0.4;
             
             composer = new EffectComposer(renderer);
             composer.addPass(renderScene);
             composer.addPass(bloomPass);
 
+            galaxyGroup = new THREE.Group();
+            scene.add(galaxyGroup);
+
             // Galactic Core
-            galaxyCore = generateGalaxy({
+            const galaxyCore = generateGalaxy({
                 count: 75000, 
                 size: 30.0,
                 radius: 3.0, 
@@ -445,10 +454,10 @@
                 insideColor: '#ffffff',
                 outsideColor: '#ffac69'
             });
-            scene.add(galaxyCore);
+            galaxyGroup.add(galaxyCore);
 
             // Main Galaxy Arms
-            galaxy = generateGalaxy({
+            const galaxy = generateGalaxy({
                 count: 150000, 
                 size: 20.0,
                 radius: 15,
@@ -460,10 +469,10 @@
                 insideColor: '#ffac69',
                 outsideColor: '#3d68b2'
             });
-            scene.add(galaxy);
+            galaxyGroup.add(galaxy);
 
             // Galaxy Dust / Haze
-            galaxyDust = generateGalaxy({
+            const galaxyDust = generateGalaxy({
                 count: 75000, 
                 size: 25.0,
                 radius: 15,
@@ -475,22 +484,7 @@
                 insideColor: '#a552f5',
                 outsideColor: '#f552a9'
             });
-            scene.add(galaxyDust);
-            
-            // Star Clusters
-            starClusters = generateGalaxy({
-                count: 2000,
-                size: 35.0,
-                radius: 14,
-                branches: 5,
-                spin: 0.5,
-                randomness: 0.1, // Tightly packed
-                yRandomness: 0.1,
-                randomnessPower: 2,
-                insideColor: '#cceeff',
-                outsideColor: '#aaddff'
-            });
-            scene.add(starClusters);
+            galaxyGroup.add(galaxyDust);
 
             // Zoom logic
             targetZoom = camera.position.z;
@@ -507,6 +501,8 @@
 
 
             window.addEventListener('resize', onWindowResize, false);
+            document.addEventListener('mousedown', onMouseDown, false);
+            document.addEventListener('mouseup', onMouseUp, false);
             document.addEventListener('mousemove', onMouseMove, false);
             animate();
         }
@@ -517,26 +513,56 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             composer.setSize(window.innerWidth, window.innerHeight);
         }
+        
+        function onMouseDown(event) {
+            isDragging = true;
+            previousMousePosition = { x: event.clientX, y: event.clientY };
+        }
+        
+        function onMouseUp(event) {
+            isDragging = false;
+        }
 
         function onMouseMove(event) {
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+            if (isDragging) {
+                const deltaX = event.clientX - previousMousePosition.x;
+                const deltaY = event.clientY - previousMousePosition.y;
+
+                galaxyGroup.rotation.y += deltaX * 0.005;
+                galaxyGroup.rotation.x += deltaY * 0.005;
+                
+                // Clamp vertical rotation to prevent flipping
+                galaxyGroup.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, galaxyGroup.rotation.x));
+
+                previousMousePosition = { x: event.clientX, y: event.clientY };
+            }
         }
         
         function animate() {
             requestAnimationFrame(animate);
             const elapsedTime = clock.getElapsedTime();
             
-            galaxy.material.uniforms.uTime.value = elapsedTime;
-            galaxyDust.material.uniforms.uTime.value = elapsedTime * 0.8;
-            galaxyCore.material.uniforms.uTime.value = elapsedTime * 1.2;
-            starClusters.material.uniforms.uTime.value = elapsedTime;
+            galaxyGroup.children.forEach(layer => {
+                if (layer.material instanceof THREE.ShaderMaterial) {
+                    layer.material.uniforms.uTime.value = elapsedTime;
+                }
+            });
 
             // Smooth zoom
             camera.position.z += (targetZoom - camera.position.z) * zoomSpeed;
 
-            camera.position.x += (mouse.x * 2 - camera.position.x) * 0.05;
-            camera.position.y += (-mouse.y * 2 - camera.position.y) * 0.05;
+            // Subtle camera breathing
+            const breathing = Math.sin(elapsedTime * 0.5) * 0.2;
+            camera.position.y = 2 + breathing;
+
+            // Pan camera only when not dragging
+            if (!isDragging) {
+                camera.position.x += (mouse.x * 2 - camera.position.x) * 0.05;
+                camera.position.y += (-mouse.y * 2 - (camera.position.y - 2 - breathing)) * 0.05; // Adjust for breathing
+            }
             camera.lookAt(scene.position);
 
             composer.render();
@@ -574,5 +600,4 @@
     </script>
 </body>
 </html>
-
 
